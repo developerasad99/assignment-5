@@ -16,7 +16,7 @@
   <body>
     <section>
       <div class="navbar bg-base-100 shadow-sm">
-          <div class="navbar w-[80%] mx-auto flex justify-between flex-col md:flex-row">
+          <div class="navbar w-[80%] mx-auto flex justify-between gap-3 md:gap-0 flex-col md:flex-row">
             <div class="">
     <h2 class="flex items-center text-2xl gap-2 font-bold">
       <img class="w-12" src="assets/github-logo.png" alt="">
@@ -24,8 +24,8 @@
     </h2>
     
   </div>
-  <div class="flex gap-2">
-    <input id="searchText" required type="text" placeholder="&#128269 Search issues..." class="input input-bordered w-24 md:w-auto" />
+  <div class="flex gap-2 flex-col md:flex-row">
+    <input id="searchText" required type="text" placeholder="&#128269 Search issues..." class="input input-bordered  md:w-auto" />
         <button onclick="loadSearchData()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search Issue</button>
 <h1 class=""></h1>
           </div>
@@ -78,6 +78,20 @@
                 
             </div>
       </section>
+      <!-- Open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
       <script src="js/script.js"></script>
   </body>
 </html>

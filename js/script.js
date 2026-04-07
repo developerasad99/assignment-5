@@ -77,16 +77,27 @@ function loadSearchData() {
       }),
     );
   } else {
-    alert("write something in Search input box");
+    alert(`write something in Search input box 📝`);
   }
+}
+function showSingleIssue(id) {
+  const link = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
 }
 const renderSection = document.getElementById("renderSection");
 function DisplayData(data) {
   renderSection.innerHTML = "";
-  let border;
+  if (data.length === 0) {
+    renderSection.innerHTML = `<div class="flex flex-col justify-center items-center text-6xl">
+     <i class="fa-regular fa-face-frown-open text-center"></i>
+    <p class="text-3xl text-center font-bold">No Issues found!</p>
+    <div/>`;
+    renderSection.classList.remove("grid");
+    return;
+  }
+  renderSection.classList.add("grid");
   for (singleData of data) {
     let createElement = document.createElement("div");
-    createElement.innerHTML = `<div class="card shadow-md ${singleData.status === "open" ? "border-[#00A96E]" : "border-[#ac1dff]"}  border-t-5 rounded-lg">
+    createElement.innerHTML = `<div onclick="my_modal_5.showModal()" class="card shadow-md ${singleData.status === "open" ? "border-[#00A96E]" : "border-[#ac1dff]"}  border-t-5 rounded-lg">
                  <div class="p-3">
                      <div class="flex justify-between ">
                      <div class="w-8">
