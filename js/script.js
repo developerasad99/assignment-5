@@ -1,3 +1,16 @@
+function loginValidation() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  if (username === "admin" && password === "admin123") {
+    document.getElementById("mainSection").classList.remove("hidden");
+    document.getElementById("loginSection").classList.add("hidden");
+  } else {
+    alert(
+      "incorrect username and password! please provide correct username and password",
+    );
+  }
+}
+
 function loadLabels(arr) {
   const createLabel = arr.map(
     (el) =>
