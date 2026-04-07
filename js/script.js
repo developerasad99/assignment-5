@@ -13,6 +13,14 @@ function getDate(str) {
   const finalDate = `<p>Create at: ${month === 0 ? `${month + 1}` : month}/${day}/${year}</p>`;
   return finalDate;
 }
+function getDateSingleIssue(str) {
+  const date = new Date(str);
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const finalDate = `<p>${day}/${month === 0 ? `${month + 1}` : month}/${year}</p>`;
+  return finalDate;
+}
 const allBtn = document.getElementById("all");
 const openBtn = document.getElementById("open");
 const closeBtn = document.getElementById("close");
@@ -93,25 +101,24 @@ function showSingleIssue(obj) {
   modalContainer.innerHTML = `<div>
         <h1 class="text-3xl font-bold">${obj.title}</h1>
         <div class="flex  items-center gap-2 mt-4">
-          <span class="text-sm text-white bg-[#00A96E] p-2 rounded-full">Opened</span>
+          <span class="text-sm text-white ${obj.status === "open" ? "bg-[#00A96E]" : obj.status === "closed" ? "bg-[#ac1dff]" : ""} bg-[#00A96E] py-2 px-4 rounded-full">${obj.status}</span>
           <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
-          <span>Opened by Fahim Ahmed</span>
+          <span>${obj.author}</span>
           <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
-          <span>22/02/2026</span>
+          <span>${getDateSingleIssue(obj.createdAt)}</span>
         </div>
         <div class="flex gap-3 mt-6">
-          <h1 class="uppercase bg-[#FEECEC] text-[#F04E4E] rounded-full px-2 py-1 text-sm"><i class="fa-solid fa-bug"></i> Bug</h1>
-          <h1 class="uppercase bg-[#FEECEC] text-[#F04E4E] rounded-full px-2 py-1 text-sm"><i class="fa-solid fa-bug"></i> Bug</h1>
+          ${loadLabels(obj.labels)}
         </div>
         <p class="text-sm mt-6 mb-6">${obj.description}</p>
         <div class="flex bg-[#F8FAFC] p-4 rounded-lg">
            <div class="flex-1">
              <p>Assignee:</p>
-             <p class="font-bold">Fahim Ahmed</p>
+             <p class="font-bold">${obj.assignee ? obj.assignee : "Not Assign"}</p>
            </div>
            <div class="flex-1">
              <p class="mb-1">Priority:</p>
-             <span class="uppercase bg-[#EF4444] text-[#fff] rounded-full px-6 py-1">High</span>
+             <span class="uppercase ${obj.priority === "high" ? "bg-[#FEECEC] text-[#EF4444]" : obj.priority === "medium" ? "bg-[#FFF6D1] text-[#F59E0B]" : obj.priority === "low" ? "bg-[#EEEFF2] text-[#9CA3AF]" : ""}  rounded-full px-6 py-1">${obj.priority}</span>
            </div>
            
         </div>
