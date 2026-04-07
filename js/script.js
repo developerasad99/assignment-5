@@ -80,8 +80,43 @@ function loadSearchData() {
     alert(`write something in Search input box 📝`);
   }
 }
-function showSingleIssue(id) {
+function loadSingleDataIssue(id) {
   const link = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  fetch(link).then((res) =>
+    res.json().then((data) => {
+      showSingleIssue(data.data);
+    }),
+  );
+}
+function showSingleIssue(obj) {
+  const modalContainer = document.getElementById("modalContainer");
+  modalContainer.innerHTML = `<div>
+        <h1 class="text-3xl font-bold">${obj.title}</h1>
+        <div class="flex  items-center gap-2 mt-4">
+          <span class="text-sm text-white bg-[#00A96E] p-2 rounded-full">Opened</span>
+          <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
+          <span>Opened by Fahim Ahmed</span>
+          <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
+          <span>22/02/2026</span>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <h1 class="uppercase bg-[#FEECEC] text-[#F04E4E] rounded-full px-2 py-1 text-sm"><i class="fa-solid fa-bug"></i> Bug</h1>
+          <h1 class="uppercase bg-[#FEECEC] text-[#F04E4E] rounded-full px-2 py-1 text-sm"><i class="fa-solid fa-bug"></i> Bug</h1>
+        </div>
+        <p class="text-sm mt-6 mb-6">${obj.description}</p>
+        <div class="flex bg-[#F8FAFC] p-4 rounded-lg">
+           <div class="flex-1">
+             <p>Assignee:</p>
+             <p class="font-bold">Fahim Ahmed</p>
+           </div>
+           <div class="flex-1">
+             <p class="mb-1">Priority:</p>
+             <span class="uppercase bg-[#EF4444] text-[#fff] rounded-full px-6 py-1">High</span>
+           </div>
+           
+        </div>
+       </div>`;
+  document.getElementById("modal").showModal();
 }
 const renderSection = document.getElementById("renderSection");
 function DisplayData(data) {
@@ -97,7 +132,7 @@ function DisplayData(data) {
   renderSection.classList.add("grid");
   for (singleData of data) {
     let createElement = document.createElement("div");
-    createElement.innerHTML = `<div onclick="my_modal_5.showModal()" class="card shadow-md ${singleData.status === "open" ? "border-[#00A96E]" : "border-[#ac1dff]"}  border-t-5 rounded-lg">
+    createElement.innerHTML = `<div onclick="loadSingleDataIssue(${singleData.id})" class="card shadow-md ${singleData.status === "open" ? "border-[#00A96E]" : "border-[#ac1dff]"}  border-t-5 rounded-lg">
                  <div class="p-3">
                      <div class="flex justify-between ">
                      <div class="w-8">

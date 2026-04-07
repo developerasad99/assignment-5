@@ -80,10 +80,37 @@
       </section>
       <!-- Open the modal using ID.showModal() method -->
 <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+<dialog id="modal" class="modal  modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div id="modalContainer">
+       <div>
+        <h1 class="text-3xl font-bold">Fix broken image uploads</h1>
+        <div class="flex  items-center gap-2 mt-4">
+          <span class="text-sm text-white bg-[#00A96E] p-2 rounded-full">Opened</span>
+          <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
+          <span>Opened by Fahim Ahmed</span>
+          <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
+          <span>22/02/2026</span>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <h1 class="uppercase bg-[#FEECEC] text-[#F04E4E] rounded-full px-2 py-1 text-sm"><i class="fa-solid fa-bug"></i> Bug</h1>
+          <h1 class="uppercase bg-[#FEECEC] text-[#F04E4E] rounded-full px-2 py-1 text-sm"><i class="fa-solid fa-bug"></i> Bug</h1>
+        </div>
+        <p class="text-sm mt-6 mb-6">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+        <div class="flex bg-[#F8FAFC] p-4 rounded-lg">
+           <div class="flex-1">
+             <p>Assignee:</p>
+             <p class="font-bold">Fahim Ahmed</p>
+           </div>
+           <div class="flex-1">
+             <p class="mb-1">Priority:</p>
+             <span class="uppercase bg-[#EF4444] text-[#fff] rounded-full px-6 py-1">High</span>
+           </div>
+           
+        </div>
+       </div>
+
+    </div>
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
