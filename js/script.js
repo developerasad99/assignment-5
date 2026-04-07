@@ -45,6 +45,7 @@ function toogleStutus(status) {
   }
 }
 function loadAllData(state) {
+  manageSpinner(true);
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   if (state == "all") {
     fetch(url).then((res) =>
@@ -52,6 +53,7 @@ function loadAllData(state) {
         DisplayData(data.data);
         counter(data.data);
         toogleStutus("all");
+        manageSpinner(false);
       }),
     );
   } else if (state == "open") {
@@ -60,6 +62,7 @@ function loadAllData(state) {
         DisplayData(data.data.filter((op) => op.status === "open"));
         counter(data.data.filter((op) => op.status === "open"));
         toogleStutus("open");
+        manageSpinner(false);
       }),
     );
   } else if (state == "closed") {
@@ -68,12 +71,14 @@ function loadAllData(state) {
         DisplayData(data.data.filter((close) => close.status === "closed"));
         counter(data.data.filter((close) => close.status === "closed"));
         toogleStutus("close");
+        manageSpinner(false);
       }),
     );
   }
 }
 
 function loadSearchData() {
+  manageSpinner(true);
   const text = document.getElementById("searchText").value;
   let url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`;
   if (text.trim()) {
@@ -82,10 +87,12 @@ function loadSearchData() {
         DisplayData(data.data);
         counter(data.data);
         toogleStutus("");
+        manageSpinner(false);
       }),
     );
   } else {
     alert(`write something in Search input box 📝`);
+    manageSpinner(false);
   }
 }
 function loadSingleDataIssue(id) {
@@ -95,6 +102,13 @@ function loadSingleDataIssue(id) {
       showSingleIssue(data.data);
     }),
   );
+}
+function manageSpinner(status) {
+  if (status) {
+    document.getElementById("spinner").classList.remove("hidden");
+  } else {
+    document.getElementById("spinner").classList.add("hidden");
+  }
 }
 function showSingleIssue(obj) {
   const modalContainer = document.getElementById("modalContainer");
@@ -134,6 +148,7 @@ function DisplayData(data) {
     <p class="text-3xl text-center font-bold">No Issues found!</p>
     <div/>`;
     renderSection.classList.remove("grid");
+    manageSpinner(false);
     return;
   }
   renderSection.classList.add("grid");
