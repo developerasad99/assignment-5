@@ -16,7 +16,8 @@
   <body>
     <section>
       <div class="navbar bg-base-100 shadow-sm">
-  <div class="flex-1">
+          <div class="navbar w-[80%] mx-auto flex justify-between flex-col md:flex-row">
+            <div class="">
     <h2 class="flex items-center text-2xl gap-2 font-bold">
       <img class="w-12" src="assets/github-logo.png" alt="">
       GitHub Issues Tracker
@@ -24,9 +25,10 @@
     
   </div>
   <div class="flex gap-2">
-    <input type="text" placeholder="&#128269 Search issues..." class="input input-bordered w-24 md:w-auto" />
-        <button class="btn btn-primary">+ New Issue</button>
+    <input id="searchText" required type="text" placeholder="&#128269 Search issues..." class="input input-bordered w-24 md:w-auto" />
+        <button onclick="loadSearchData()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search Issue</button>
 <h1 class=""></h1>
+          </div>
           </div>
     </div>
 </div>
@@ -34,9 +36,9 @@
     <!-- end header section  -->
      <section class="mt-20">
       <div class="tabSection w-[80%] mx-auto shadow p-4">
-        <button class="btn w-20">All</button>
-        <button class="btn w-20">Open</button>
-        <button class="btn w-20">Closed</button>
+        <button id="all" onclick="loadAllData('all')" class="btn status w-20 btn-primary">All</button>
+        <button id="open" onclick="loadAllData('open')" class="btn status w-20">Open</button>
+        <button id="close" onclick="loadAllData('closed')" class="btn status w-20">Closed</button>
       </div>
      </section>
      <!-- end tap section  -->

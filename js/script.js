@@ -13,6 +13,29 @@ function getDate(str) {
   const finalDate = `<p>Create at: ${month === 0 ? `${month + 1}` : month}/${day}/${year}</p>`;
   return finalDate;
 }
+const allBtn = document.getElementById("all");
+const openBtn = document.getElementById("open");
+const closeBtn = document.getElementById("close");
+
+function toogleStutus(status) {
+  if (status === "all") {
+    openBtn.classList.remove("btn-primary");
+    closeBtn.classList.remove("btn-primary");
+    allBtn.classList.add("btn-primary");
+  } else if (status === "open") {
+    allBtn.classList.remove("btn-primary");
+    closeBtn.classList.remove("btn-primary");
+    openBtn.classList.add("btn-primary");
+  } else if (status === "close") {
+    allBtn.classList.remove("btn-primary");
+    openBtn.classList.remove("btn-primary");
+    closeBtn.classList.add("btn-primary");
+  } else {
+    allBtn.classList.remove("btn-primary");
+    openBtn.classList.remove("btn-primary");
+    closeBtn.classList.remove("btn-primary");
+  }
+}
 function loadAllData(state) {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   if (state == "all") {
@@ -20,8 +43,41 @@ function loadAllData(state) {
       res.json().then((data) => {
         DisplayData(data.data);
         counter(data.data);
+        toogleStutus("all");
       }),
     );
+  } else if (state == "open") {
+    fetch(url).then((res) =>
+      res.json().then((data) => {
+        DisplayData(data.data.filter((op) => op.status === "open"));
+        counter(data.data.filter((op) => op.status === "open"));
+        toogleStutus("open");
+      }),
+    );
+  } else if (state == "closed") {
+    fetch(url).then((res) =>
+      res.json().then((data) => {
+        DisplayData(data.data.filter((close) => close.status === "closed"));
+        counter(data.data.filter((close) => close.status === "closed"));
+        toogleStutus("close");
+      }),
+    );
+  }
+}
+
+function loadSearchData() {
+  const text = document.getElementById("searchText").value;
+  let url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`;
+  if (text.trim()) {
+    fetch(url).then((res) =>
+      res.json().then((data) => {
+        DisplayData(data.data);
+        counter(data.data);
+        toogleStutus("");
+      }),
+    );
+  } else {
+    alert("write something in Search input box");
   }
 }
 const renderSection = document.getElementById("renderSection");
